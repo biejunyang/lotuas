@@ -30,6 +30,7 @@
     <modules>
         <module>../lotuas-config</module>
         <module>../lotuas-eureka-server</module>
+        <module>../lotuas-sp1</module>
     </modules>
 
     <dependencyManagement>

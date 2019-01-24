@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class HelloController {
 
-    public static boolean canVistDb=false;
+    public static boolean canVistDb=true;
 
 
     @GetMapping("/hello")

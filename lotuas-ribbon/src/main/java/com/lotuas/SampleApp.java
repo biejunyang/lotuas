@@ -14,14 +14,19 @@ public class SampleApp {
 
     public static void main(String[] args) throws Exception {
 
-        ConfigurationManager.loadPropertiesFromResources("sample-client.properties");  // 1
+        // 1、从属性文件加载属性
+        ConfigurationManager.loadPropertiesFromResources("sample-client.properties");
         System.out.println(ConfigurationManager.getConfigInstance().getProperty("sample-client.ribbon.listOfServers"));
-        RestClient client = (RestClient) ClientFactory.getNamedClient("sample-client");  // 2
+
+
+        // 2、
+        RestClient client = (RestClient) ClientFactory.getNamedClient("sample-client");
         HttpRequest request = HttpRequest.newBuilder().uri(new URI("/findPerson/1")).build(); // 3
         for (int i = 0; i < 20; i++)  {
             HttpResponse response = client.executeWithLoadBalancer(request); // 4
             System.out.println("Status code for " + response.getRequestedURI() + "  :" + response.getStatus());
         }
+
         @SuppressWarnings("rawtypes")
         ZoneAwareLoadBalancer lb = (ZoneAwareLoadBalancer) client.getLoadBalancer();
         System.out.println(lb.getLoadBalancerStats());

@@ -10,9 +10,11 @@ import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,13 @@ public class InvokerController {
         String result=restTemplate().getForObject("http://lotuas-sp1/hello?name="+name, String.class);
         return result;
     }
+
+    @GetMapping("/findPerson/{personId}")
+    public String findPerson(@PathVariable("personId") Integer personId){
+        String result=restTemplate().getForObject("http://lotuas-sp1/findPerson/3", String.class);
+        return result;
+    }
+
 
     @GetMapping("/router")
     public void router(){

@@ -31,6 +31,7 @@
         <module>../lotuas-config</module>
         <module>../lotuas-eureka-server</module>
         <module>../lotuas-sp1</module>
+        <module>../lotuas-feign</module>
     </modules>
 
     <dependencyManagement>

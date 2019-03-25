@@ -8,5 +8,6 @@ public class FeignTest {
     public void FeignHelloTest(){
         FeignHelloService helloService= Feign.builder().target(FeignHelloService.class, "http://localhost:8080/");
         System.out.println(helloService.syaHello("张三"));
+        System.out.println(helloService.syaHello(20, "万古"));
     }
 }

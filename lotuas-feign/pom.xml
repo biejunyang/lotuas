@@ -11,6 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lotuas-feign</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>../lotuas-sys</module>
+    </modules>
 
 
     <dependencies>
@@ -20,11 +24,17 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-core -->
+        <!-- https://mvnrepository.com/artifact/com.netflix.feign/feign-core -->
         <dependency>
-            <groupId>io.github.openfeign</groupId>
+            <groupId>com.netflix.feign</groupId>
             <artifactId>feign-core</artifactId>
-            <version>10.2.0</version>
+            <version>8.18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>8.18.0</version>
         </dependency>
 
         <dependency>

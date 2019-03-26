@@ -1,5 +1,8 @@
 package com.lotuas.feign.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class UserDto {
@@ -10,9 +13,10 @@ public class UserDto {
 
     private Integer age;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date birthday;
 
-    private Byte sex;
+    private Integer sex;
 
     public Integer getUserId() {
         return userId;
@@ -46,11 +50,22 @@ public class UserDto {
         this.birthday = birthday;
     }
 
-    public Byte getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", birthday=" + birthday +
+                ", sex=" + sex +
+                '}';
     }
 }

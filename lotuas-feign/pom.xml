@@ -11,10 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lotuas-feign</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>../lotuas-sys</module>
-    </modules>
+    <packaging>jar</packaging>
 
 
     <dependencies>
@@ -37,10 +34,18 @@
             <version>8.18.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
 
     </dependencies>
 

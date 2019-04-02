@@ -1,5 +1,7 @@
 package com.lotuas.feign;
 
+import com.lotuas.feign.config.MyFeignContract;
+import com.lotuas.feign.config.MyFeignInterceptor;
 import com.lotuas.feign.dto.UserDto;
 import com.lotuas.feign.service.FeignHelloService;
 import com.lotuas.feign.service.FeignUserService;
@@ -31,7 +33,8 @@ public class FeignTest {
 
     @Test
     public void feignUesrService(){
-        FeignUserService userService= Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder()).target(FeignUserService.class, "http://localhost:8080/");
+        FeignUserService userService= Feign.builder().encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder()).target(FeignUserService.class, "http://localhost:8080/");
 
         Map<String, Object> queryMap=new HashMap<>();
         queryMap.put("userId", 1);

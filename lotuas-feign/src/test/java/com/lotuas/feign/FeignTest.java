@@ -19,7 +19,8 @@ public class FeignTest {
     @Test
     public void feignHelloTest(){
 
-        FeignHelloService helloService= Feign.builder().target(FeignHelloService.class, "http://localhost:8080/");
+        FeignHelloService helloService= Feign.builder()
+                .target(FeignHelloService.class, "http://localhost:8080/");
 
         System.out.println(helloService.hello1("张三"));
 
@@ -31,7 +32,10 @@ public class FeignTest {
 
     @Test
     public void feignUesrService(){
-        FeignUserService userService= Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder()).target(FeignUserService.class, "http://localhost:8080/");
+        FeignUserService userService= Feign.builder()
+                    .encoder(new JacksonEncoder())
+                    .decoder(new JacksonDecoder())
+                    .target(FeignUserService.class, "http://localhost:8080/");
 
         Map<String, Object> queryMap=new HashMap<>();
         queryMap.put("userId", 1);

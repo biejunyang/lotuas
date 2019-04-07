@@ -10,7 +10,7 @@ public class MyFeignContract extends Contract.BaseContract {
 
     @Override
     protected void processAnnotationOnClass(MethodMetadata data, Class<?> clz) {
-        super.processAnnotationOnClass(data, clz);
+
     }
 
     @Override

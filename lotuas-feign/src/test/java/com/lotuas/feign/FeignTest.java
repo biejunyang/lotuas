@@ -61,6 +61,5 @@ public class FeignTest {
         System.out.println(userService.updateUser(updateUser));
 
         System.out.println(userService.deleteUser(10));
-
     }
 }

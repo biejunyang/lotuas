@@ -16,6 +16,9 @@ public interface FeignUserService {
     @RequestLine("GET /user")
     List<UserDto> findUser(@QueryMap Map<String, Object> queryMap);
 
+    @RequestLine("GET /user")
+    List<UserDto> findUser(@Param("userId") Integer userId);
+
     @RequestLine("POST /user")
     UserDto addUser(UserDto userDto);
 

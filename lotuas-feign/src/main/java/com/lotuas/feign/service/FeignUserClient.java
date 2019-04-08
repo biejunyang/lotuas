@@ -19,7 +19,6 @@ public interface FeignUserClient {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     List<UserDto> findUser(@RequestParam Map<String, Object> params);
 
-
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     UserDto addUser(UserDto userDto);
 

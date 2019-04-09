@@ -28,11 +28,21 @@
 
 
     <modules>
-        <module>../lotuas-config</module>
+        <!--<module>../lotuas-config</module>-->
         <module>../lotuas-eureka-server</module>
         <module>../lotuas-sp1</module>
+        <module>../lotuas-invoker1</module>
+        <module>../lotuas-ribbon</module>
         <module>../lotuas-feign</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
 
     <dependencyManagement>
         <dependencies>

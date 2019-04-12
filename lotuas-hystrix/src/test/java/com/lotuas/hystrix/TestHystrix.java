@@ -1,9 +1,21 @@
 package com.lotuas.hystrix;
 
 import com.lotuas.hystrix.command.HelloCommand;
+import com.netflix.config.ConfigurationManager;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestHystrix {
+
+    @Before
+    private void init(){
+
+
+        ConfigurationManager.getConfigInstance()
+                .setProperty("hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds", 1000);
+
+
+    }
 
     @Test
     public void testNormal(){

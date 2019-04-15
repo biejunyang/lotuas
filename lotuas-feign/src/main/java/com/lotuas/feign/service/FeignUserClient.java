@@ -2,6 +2,7 @@ package com.lotuas.feign.service;
 
 import com.lotuas.feign.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Map;
 
+@Service
 @FeignClient("lotuas-sp1")
 public interface FeignUserClient {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    List<UserDto> findUser(@RequestParam Integer userId, @RequestParam String name);
+    List<UserDto> findUser(@RequestParam("userId") Integer userId, @RequestParam("name") String name);
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     List<UserDto> findUser(@RequestParam Map<String, Object> params);

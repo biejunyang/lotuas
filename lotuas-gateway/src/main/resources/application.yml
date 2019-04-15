@@ -1,0 +1,29 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: lotuas-gateway
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  ##路由定义
+  routes:
+    ##根据路由名转发到外部服务地址
+    sys:
+      url: http://localhost:8083
+    feign:
+      url: http://localhost:8080
+    ##根据路由名转发到集群服务,注意先要将本身注册到eureka服务注册中心
+    sp1:
+      serviceId: lotuas-sp1
+
+    ##根据路由路径转发都集群或者外部服务地
+    feignCloud:
+      path: /feignCloud22/**
+      serviceId: lotuas-feign
+

@@ -1,3 +1,7 @@
+MYSQL_HOST: 47.97.177.132
+REDIS_HOST: 47.97.177.132
+RABBIT_MQ_HOST: 47.97.177.132
+
 server:
   port: 8085
 
@@ -9,6 +13,16 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  redis:
+    database: 1
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    pool:
+    max-active: 20
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/lotuas?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
 
 eureka:
   instance:

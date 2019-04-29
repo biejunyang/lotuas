@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: lotuas-resoruce-server
+
+auth-server-url: http://localhost:8080
+security:
+  oauth2:
+    client:
+      client-id: client1
+      client-secret: client1
+      scope: client1_read_write
+      access-token-uri: ${auth-server-url}/oauth/token
+      user-authorization-uri: ${auth-server-url}/oauth/authorize
+    resource:
+      token-info-uri: ${auth-server-url}/oauth/check_token #检查令牌

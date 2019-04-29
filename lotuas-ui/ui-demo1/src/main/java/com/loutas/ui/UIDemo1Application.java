@@ -1,5 +1,4 @@
-package com.lotuas.oauth2;
-
+package com.loutas.ui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,12 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class OAuth2ServerApplication {
+public class UIDemo1Application {
 
     public static void main(String[] args){
-        SpringApplication.run(OAuth2ServerApplication.class, args);
-
+        SpringApplication.run(UIDemo1Application.class, args);
     }
-
 
 }

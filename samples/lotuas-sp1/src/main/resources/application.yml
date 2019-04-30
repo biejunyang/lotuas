@@ -1,0 +1,18 @@
+#server:
+#  port: 8081
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance-info-replication-interval-seconds: 30
+spring:
+  application:
+    name: lotuas-sp1
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8

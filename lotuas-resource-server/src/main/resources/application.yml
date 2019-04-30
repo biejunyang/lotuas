@@ -6,6 +6,7 @@ spring:
     name: lotuas-resoruce-server
 
 auth-server-url: http://localhost:8080
+
 security:
   oauth2:
     client:

@@ -18,11 +18,6 @@ import javax.sql.DataSource;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 
-    @Autowired
-    private DataSource dataSource;
-
-
-
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -35,7 +30,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
+        clients.inMemory().withClient("client1").secret("client1").scopes("lotuas")
+                .authorizedGrantTypes("authorization_code").redirectUris("http://baidu.com").autoApprove(true);
     }
 
 

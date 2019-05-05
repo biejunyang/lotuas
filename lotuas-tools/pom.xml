@@ -9,12 +9,8 @@
         <relativePath>../lotuas-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>oauth2</module>
-        <module>mybatis-samples</module>
-    </modules>
-    <artifactId>samples</artifactId>
+
+    <artifactId>lotuas-tools</artifactId>
 
 
 </project>

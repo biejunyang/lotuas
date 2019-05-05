@@ -20,27 +20,23 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <!--<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>-->
         <spring-cloud.version>Greenwich.M3</spring-cloud.version>
-
     </properties>
 
-
-
     <modules>
-        <!--<module>../lotuas-config</module>-->
-        <module>../lotuas-eureka-server</module>
-        <module>../lotuas-sp1</module>
-        <module>../lotuas-invoker1</module>
-        <module>../lotuas-ribbon</module>
-        <module>../lotuas-feign</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
 
 
@@ -54,6 +50,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -72,14 +69,14 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
 
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+        <!--<repository>-->
+            <!--<id>spring-milestones</id>-->
+            <!--<name>Spring Milestones</name>-->
+            <!--<url>https://repo.spring.io/milestone</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
     </repositories>
 
 </project>

@@ -45,9 +45,11 @@ public class SystemContext
 		//系统配置文件读取
 		Properties sysProps=new Properties();
 		InputStream sysIn=Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
-		sysProps.load(sysIn);
-		for(Map.Entry<Object, Object> en: sysProps.entrySet()){
-			systemInfo.put(String.valueOf(en.getKey()), String.valueOf(en.getValue()));
+		if(sysIn!=null){
+			sysProps.load(sysIn);
+			for(Map.Entry<Object, Object> en: sysProps.entrySet()){
+				systemInfo.put(String.valueOf(en.getKey()), String.valueOf(en.getValue()));
+			}
 		}
 
 		

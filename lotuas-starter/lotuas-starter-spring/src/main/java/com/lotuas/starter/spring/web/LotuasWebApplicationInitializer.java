@@ -18,9 +18,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
@@ -45,14 +47,17 @@ public class LotuasWebApplicationInitializer extends AbstractAnnotationConfigDis
             List<String> customWebApplicationInitializer=loadCustomerWebApplicationInitializer();
             if(CollectionUtils.isEmpty(customWebApplicationInitializer)){
                 super.onStartup(webContainer);
-            }else{
-                for(String initializerName: customWebApplicationInitializer){
-                    WebApplicationInitializer initializer = (WebApplicationInitializer) Class.forName(initializerName).newInstance();
-                    initializer.onStartup(webContainer);
-                }
             }
-            SystemContext.setServletContext(webContainer);
 
+            /**
+             * 添加编码转换过滤器
+             */
+            FilterRegistration.Dynamic filterRegistration=webContainer.addFilter("CharacterEncodingFilter",
+                    new CharacterEncodingFilter("utf-8", true));
+            filterRegistration.addMappingForUrlPatterns(null, false, "/*");
+            filterRegistration.setAsyncSupported(true);
+
+            SystemContext.setServletContext(webContainer);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("web application initializer start up failed!!!!");
@@ -91,7 +96,9 @@ public class LotuasWebApplicationInitializer extends AbstractAnnotationConfigDis
      */
     @Override
     protected Filter[] getServletFilters() {
-        return super.getServletFilters();
+//        CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter("utf-8", true);
+//        return new Filter[]{characterEncodingFilter};
+        return null;
     }
 
 

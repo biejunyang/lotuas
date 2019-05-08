@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,13 +14,18 @@ public class HelloController implements ApplicationContextAware {
 
 
     @GetMapping("/hello")
-    public String hello(String name){
+    public String hello1(String name){
         System.out.println(appContext.getBean(HelloService.class));
         System.out.println(appContext.getBean(HelloController.class));
         return "hello, "+name;
     }
 
-
+    @PostMapping("/hello")
+    public String hello2(String name){
+        System.out.println(appContext.getBean(HelloService.class));
+        System.out.println(appContext.getBean(HelloController.class));
+        return "hello, "+name;
+    }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         System.out.println(applicationContext);

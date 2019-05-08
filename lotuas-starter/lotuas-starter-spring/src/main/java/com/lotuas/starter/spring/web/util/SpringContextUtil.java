@@ -1,4 +1,4 @@
-package com.lotuas.starter.spring.web;
+package com.lotuas.starter.spring.web.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

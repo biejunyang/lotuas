@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -73,6 +72,10 @@ public class SystemContext
 	
 	public static ServletContext getServletContext(){
 		return servletContext;
+	}
+
+	public static void setServletContext(ServletContext ctx){
+		servletContext=ctx;
 	}
 
 	public static Map<String, HttpSession> getSessions() {

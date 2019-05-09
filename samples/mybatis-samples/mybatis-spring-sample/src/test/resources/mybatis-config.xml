@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<!-- MyBatis 系统的核心设置，包含获取数据库连接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器（TransactionManager）-->
+<configuration>
+
+    <!-- 配置文件中可以使用的属性配置,如${属性名},可以加载外部属性文件，也可以内部定义 -->
+    <properties resource="jdbc.properties">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+
+        <!-- 启用默认值特性 -->
+        <property name="org.apache.ibatis.parsing.PropertyParser.enable-default-value" value="true"/>
+    </properties>
+
+
+
+    <!--Mybatis 全局属性配置 -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+
+    <!--类型别名定义：是为Java类型设置一个短的名字。仅和映射器XML配置有关，用来减少类完全限定名的冗余-->
+    <!--Java中常见的类型mybatis已经默认设置好别名了，如:int型别名为_int, Integer型别名为int-->
+    <typeAliases>
+        <!-- 为单个Java类型取别名-->
+        <typeAlias type="com.lotuas.samples.mybatis.domain.User" alias="user"/>
+
+        <!--扫描包下面的所有类，设置默认别名。默认为会使Bean的首字母小写的非限定类名来作为它的别名
+            也可以使用@Alias("author")注解在class上，指定别名
+
+        <package name="com.lotuas.samples.mybatis.domain" />
+        -->
+    </typeAliases>
+
+
+
+
+
+    <!--
+        环境配置（environments）:
+            MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。例如，开发、测试和生产环境需要有不同的配置；或者想在具有相同 Schema 的多个生产数据库中 使用相同的 SQL 映射。
+            但是尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境,default属性设置默认加载的环境
+            所以，如果你想连接两个数据库，就需要创建两个 SqlSessionFactory 实例，每个数据库对应一个。
+    -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver:}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username:root}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!--
+        映射器（mappers）：
+    -->
+    <mappers>
+        <!-- 使用相对于类路径的资源引用 -->
+        <mapper resource="com/lotuas/samples/mybatis/dao/UserDao.xml"/>
+
+        <!-- 使用完全限定资源定位符（URL） -->
+        <!--<mapper url="file:///var/mappers/AuthorMapper.xml"/>-->
+
+        <!-- 使用映射器接口的完全限定类名 -->
+        <mapper class="com.lotuas.samples.mybatis.dao.UserDao"/>
+
+        <!-- 将包内的映射器接口全部注册为映射器 -->
+        <!--<package name="com.lotuas.samples.mybatis.dao"/>-->
+    </mappers>
+
+
+
+
+
+
+
+
+
+
+    <!--
+        自定义类型转换器:MyBatis 在预处理语句（PreparedStatement）中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型
+    <typeHandlers>
+        <typeHandler handler="org.mybatis.example.ExampleTypeHandler"/>
+    </typeHandlers>
+    -->
+
+    <!-- 对象工厂：MyBatis 每次创建结果对象的新实例时，它都会使用一个对象工厂（ObjectFactory）实例来完成。 默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过参数构造方法来实例化。
+
+    <objectFactory type="org.mybatis.example.ExampleObjectFactory">
+        <property name="someProperty" value="100"/>
+    </objectFactory>
+    -->
+
+
+</configuration>

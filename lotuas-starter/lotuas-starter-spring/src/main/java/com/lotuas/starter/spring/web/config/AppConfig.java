@@ -9,4 +9,5 @@ import org.springframework.stereotype.Controller;
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type= FilterType.ANNOTATION, classes = {Controller.class})})
 @Configuration
 public class AppConfig {
+
 }

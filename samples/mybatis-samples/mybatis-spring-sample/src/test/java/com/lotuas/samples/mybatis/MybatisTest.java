@@ -1,27 +1,28 @@
 package com.lotuas.samples.mybatis;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.lotuas.samples.mybatis.dao.UserDao;
 import com.lotuas.samples.mybatis.domain.User;
-import com.lotuas.starter.spring.web.SystemContext;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class MybatisTest {
 
 
     private static SqlSessionFactory sqlSessionFactory;
+
+    private SqlSession session;
+    private UserDao userDao;
 
     @BeforeClass
     public static void init() throws IOException {
@@ -37,27 +38,72 @@ public class MybatisTest {
 //        dataSource.setPassword("123456");
 ////        dataSource.setDefaultAutoCommit(false);
 //
-//
 //        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-//
 //        Environment environment = new Environment("development", transactionFactory, dataSource);
-//
 //        Configuration configuration = new Configuration(environment);
 //        configuration.setLazyLoadingEnabled(true);
+////        configuration.setMapUnderscoreToCamelCase(true);
+//        configuration.getTypeAliasRegistry().registerAliases("com.lotuas.samples.mybatis.domain");
 //        configuration.addMappers("com.lotuas.samples.mybatis.dao");
-//        configuration.getTypeAliasRegistry().registerAlias("user", User.class);
-////        configuration.addMapper(UserDao.class);
 //        sqlSessionFactory=sqlSessionFactoryBuilder.build(configuration);
     }
 
 
+    @Before
+    public void initMapper(){
+        this.session=sqlSessionFactory.openSession(true);
+        this.userDao=session.getMapper(UserDao.class);
+    }
+
+
+
     @Test
-    public void test(){
-        SqlSession session=sqlSessionFactory.openSession();
-//        User user=session.selectOne("com.lotuas.samples.mybatis.dao.UserDao.getUser", 1);
-        UserDao userDao=session.getMapper(UserDao.class);
-        User user=userDao.getUser(1);
+    public void testGetUser(){
+        User user=session.selectOne("com.lotuas.samples.mybatis.dao.UserDao.getUser", 1);
         System.out.println(user);
+        System.out.println(userDao.getUser(2));
+    }
+
+    @Test
+    public void testListUser(){
+        List<Map<String, Object>> users=session.selectList("com.lotuas.samples.mybatis.dao.UserDao.listUser", null);
+        System.out.println(users);
+        System.out.println(userDao.listPageUser(null, null, null));
+    }
+
+
+    @Test
+    public void testAddUser(){
+        User user=new User();
+        user.setName("王五");
+        user.setAge(22);
+        user.setBirthday(new Date());
+        user.setSex((byte)1);
+        user.setWeight(22.51);
+        user.setOrganId(2);
+        user.setCreateTime(new Date());
+        userDao.addUser(user);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testAddUsers(){
+        List<User> users=new ArrayList<User>();
+        for(int i=0; i< 10; i++){
+            User user=new User();
+            user.setName("王五"+i);
+            user.setAge(10+i);
+            user.setBirthday(new Date());
+            user.setSex((byte)1);
+            user.setWeight(22.51);
+            user.setOrganId(i);
+            user.setCreateTime(new Date());
+            users.add(user);
+        }
+        userDao.addUsers(users);
+        for(User user: users){
+            System.out.println(user);
+        }
 
     }
 }

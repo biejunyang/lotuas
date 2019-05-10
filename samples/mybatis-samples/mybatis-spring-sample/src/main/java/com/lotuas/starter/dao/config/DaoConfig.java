@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource({"classpath:application.properties"})
+@MapperScan({"com.lotuas.samples.mybatis.dao"})
 public class DaoConfig {
     @Autowired
     private Environment env;
@@ -24,8 +26,8 @@ public class DaoConfig {
     public DataSource dataSource(){
         DruidDataSource dataSource=new DruidDataSource();
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
-        dataSource.setUsername(env.getProperty("spring.dataource.username"));
-        dataSource.setPassword(env.getProperty("spring.dataource.password"));
+        dataSource.setUsername(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
         dataSource.setDefaultAutoCommit(false);
         return dataSource;
     }
@@ -37,11 +39,13 @@ public class DaoConfig {
     }
 
 
+
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:resources/mapper/**/*.xml"));
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
+        factoryBean.setTypeAliasesPackage("com.lotuas.samples.mybatis.domain");
         return factoryBean.getObject();
     }
 

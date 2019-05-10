@@ -31,12 +31,9 @@
 
         <!--扫描包下面的所有类，设置默认别名。默认为会使Bean的首字母小写的非限定类名来作为它的别名
             也可以使用@Alias("author")注解在class上，指定别名
-
         <package name="com.lotuas.samples.mybatis.domain" />
         -->
     </typeAliases>
-
-
 
 
 
@@ -60,29 +57,24 @@
 
 
     <!--
-        映射器（mappers）：
+        映射器（mappers）：在mybatis中注册mapper映射器，可以通过指定映射器接口，或者映射xml文件来注册。
+        注意通过指定接口注册时，对应的映射.xml文件需要和接口在统一路径下，
+        执行.xml文件时则不必，因为xml中命名空间定义了接口类型
     -->
     <mappers>
+
         <!-- 使用相对于类路径的资源引用 -->
-        <mapper resource="com/lotuas/samples/mybatis/dao/UserDao.xml"/>
+        <mapper resource="mapper/UserDao.xml"/>
 
         <!-- 使用完全限定资源定位符（URL） -->
         <!--<mapper url="file:///var/mappers/AuthorMapper.xml"/>-->
 
         <!-- 使用映射器接口的完全限定类名 -->
-        <mapper class="com.lotuas.samples.mybatis.dao.UserDao"/>
+        <!--<mapper class="com.lotuas.samples.mybatis.dao.UserDao"/>-->
 
         <!-- 将包内的映射器接口全部注册为映射器 -->
         <!--<package name="com.lotuas.samples.mybatis.dao"/>-->
     </mappers>
-
-
-
-
-
-
-
-
 
 
     <!--

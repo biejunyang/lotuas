@@ -1,6 +1,8 @@
 package com.lotuas.samples.mybatis;
 
+import com.lotuas.samples.mybatis.domain.User;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +15,19 @@ public class HelloController implements ApplicationContextAware {
     private ApplicationContext appContext;
 
 
+    @Autowired
+    private HelloService helloService;
+
     @GetMapping("/hello")
     public String hello1(String name){
-        System.out.println(appContext.getBean(HelloService.class));
-        System.out.println(appContext.getBean(HelloController.class));
+        for(User usre: helloService.listUser()){
+            System.out.println(usre);
+        }
         return "hello, "+name;
     }
 
     @PostMapping("/hello")
     public String hello2(String name){
-        System.out.println(appContext.getBean(HelloService.class));
-        System.out.println(appContext.getBean(HelloController.class));
         return "hello, "+name;
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射器的映射文件,将接口方法映射到mybatis Sql操作上,下级元素说明：
+        cache – 对给定命名空间的缓存配置。
+        cache-ref – 对其他命名空间缓存配置的引用。
+        resultMap – 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象。
+        parameterMap – 已被废弃！老式风格的参数映射。更好的办法是使用内联参数，此元素可能在将来被移除。文档中不会介绍此元素。
+        sql – 可被其他语句引用的可重用语句块。
+        insert – 映射插入语句
+        update – 映射更新语句
+        delete – 映射删除语句
+        select – 映射查询语句
+-->
+<mapper namespace="com.lotuas.samples.mybatis.dao.UserDao">
+
+    <resultMap id="user" type="com.lotuas.samples.mybatis.domain.User">
+        <result column="organ_id" property="organId"/>
+    </resultMap>
+
+
+    <select id="getUser" resultMap="user">
+        SELECT * FROM uum_user WHERE ID = #{id}
+    </select>
+
+
+    <select id="listUser" resultType="hashmap">
+        select * from uum_user
+    </select>
+
+    <select id="listPageUser" resultMap="user">
+        select * from uum_user
+    </select>
+
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into uum_user(name,age,sex,birthday,weight,organ_id,create_time)
+        values(#{name}, #{age}, #{sex}, #{birthday}, #{weight}, #{organId}, #{createTime})
+    </insert>
+
+    <insert id="addUsers" useGeneratedKeys="true" keyProperty="id">
+        insert into uum_user(name,age,sex,birthday,weight,organ_id,create_time)
+        values
+        <foreach collection="list" item="u" separator=",">
+            (#{u.name}, #{u.age}, #{u.sex}, #{u.birthday}, #{u.weight}, #{u.organId}, #{u.createTime})
+        </foreach>
+    </insert>
+
+
+</mapper>

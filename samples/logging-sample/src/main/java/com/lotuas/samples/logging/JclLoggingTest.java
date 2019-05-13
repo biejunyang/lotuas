@@ -8,7 +8,7 @@ public class JclLoggingTest {
     public static final Log logger= LogFactory.getLog(JclLoggingTest.class);
 
     public static void main(String[] args){
-        logger.info("xxxx");
+        logger.info("xxxx"+logger);
         System.out.println("xxxddddx");
     }
 

@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis-samples</module>
+        <module>logging-sample</module>
     </modules>
 
 

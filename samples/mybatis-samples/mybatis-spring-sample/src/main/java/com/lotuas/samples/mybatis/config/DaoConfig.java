@@ -13,6 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -24,11 +25,12 @@ public class DaoConfig {
 
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() throws SQLException {
         DruidDataSource dataSource=new DruidDataSource();
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        dataSource.setFilters("stat,wall,slf4j");
         return dataSource;
     }
 

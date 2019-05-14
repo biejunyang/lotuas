@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletRegistration;
+
 @RestController
 public class HelloController implements ApplicationContextAware {
 
     private ApplicationContext appContext;
+
 
 
     @Autowired

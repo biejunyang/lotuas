@@ -9,10 +9,9 @@
     <version>1.0-SNAPSHOT</version>
 
     <parent>
-        <artifactId>lotuas-parent</artifactId>
+        <artifactId>lotuas-spring-cloud-pom</artifactId>
         <groupId>com.lotuas</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../lotuas-parent/pom.xml</relativePath>
     </parent>
 
 

@@ -17,6 +17,7 @@
     <modules>
         <module>mybatis-samples</module>
         <module>logging-sample</module>
+        <module>logging-spring-sample</module>
     </modules>
 
 

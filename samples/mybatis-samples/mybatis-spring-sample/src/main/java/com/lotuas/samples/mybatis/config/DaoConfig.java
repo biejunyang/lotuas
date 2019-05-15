@@ -1,6 +1,9 @@
 package com.lotuas.samples.mybatis.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidDataSourceStatLoggerAdapter;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -12,6 +15,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -30,9 +36,11 @@ public class DaoConfig {
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
-        dataSource.setFilters("stat,wall,slf4j");
+        dataSource.setFilters("stat,wall,log4j2");
+        dataSource.setTimeBetweenLogStatsMillis(10000);
         return dataSource;
     }
+
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
@@ -42,8 +50,6 @@ public class DaoConfig {
         factoryBean.setTypeAliasesPackage(env.getProperty("mybatis.type-aliases-package"));
         return factoryBean.getObject();
     }
-
-
 
 
 }

@@ -54,7 +54,7 @@ public class DruidConfig {
      * @return
      */
     @Bean
-    public FilterRegistrationBean druidStatFilter(){
+    public FilterRegistrationBean druidWebStatFilter(){
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
 
         //添加过滤规则.

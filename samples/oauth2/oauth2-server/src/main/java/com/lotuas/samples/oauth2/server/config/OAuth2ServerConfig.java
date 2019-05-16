@@ -36,26 +36,20 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
      * 1.1、授权服务端点设置：
-     *      AuthorizationEndpoint可以通过以下方式配置支持的授权类型AuthorizationServerEndpointsConfigurer。默认情况下，所有授权类型均受支持，除了密码（有关如何切换它的详细信息，请参见下文）。以下属性会影响授权类型：
+     *      AuthorizationEndpoint可以通过以下方式配置支持的授权类型AuthorizationServerEndpointsConfigurer。默认情况下，所有授权类型均受支持，
      *      authenticationManager：通过注入密码授权被打开AuthenticationManager。
      *      userDetailsService：如果您注入UserDetailsService或者全局配置（例如a GlobalAuthenticationManagerConfigurer），则刷新令牌授权将包含对用户详细信息的检查，以确保该帐户仍然活动
      *      authorizationCodeServices：定义AuthorizationCodeServices授权代码授权的授权代码服务（实例）。
      *      implicitGrantService：在批准期间管理状态。
      *      tokenGranter：（TokenGranter完全控制授予和忽略上述其他属性）
-     *
-     *    默认oauth2.0授权服务端点：
-     *      /oauth/authorize    授权端点,需要经过用户登录认证
-     *      /oauth/token    令牌端点，不需要认证
-     *      /oauth/confirm_access    用户批准授权的端点
-     *      /oauth/error    用于渲染授权服务器的错误
-     *      /oauth/check_token    资源服务器解码access token
-     *      /oauth/check_token    当使用JWT的时候，暴露公钥的端点
+
      *
      * @param endpoints
      * @throws Exception
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
 //        endpoints.authenticationManager(authenticationManager)
 //                .tokenStore(memoryTokenStore())
 //                .userDetailsService(userDetailsService);
@@ -73,7 +67,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
     }
 
 
